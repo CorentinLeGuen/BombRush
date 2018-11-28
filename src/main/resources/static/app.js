@@ -1,51 +1,37 @@
 var stompClient = null;
 
-function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
-    if (connected) {
-        $("#conversation").show();
-    }
-    else {
-        $("#conversation").hide();
-    }
-    $("#rooms").html("");
-}
-
-function connect() {
-    var socket = new SockJS('/bombrush');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/room', function (greeting) {
-            console.log(greeting);
-            showGreeting(JSON.parse(greeting.body).title);
-        });
+var socket = new SockJS('/bombrush');
+stompClient = Stomp.over(socket);
+stompClient.connect({}, function (frame) {
+    stompClient.subscribe('/room', function (greeting) {
+        showGreeting(JSON.parse(greeting.body).title);
     });
-}
+});
 
-function disconnect() {
-    if (stompClient !== null) {
-        stompClient.disconnect();
-    }
-    setConnected(false);
-    console.log("Disconnected");
-}
-
-function sendName() {
-    stompClient.send("/app/info", {}, JSON.stringify($("#title").val()));
+function newRoom() {
+    stompClient.send("/app/info", {}, $("#title").val());
 }
 
 function showGreeting(message) {
     $("#rooms").append("<tr><td>" + message + "</td></tr>");
 }
 
+function fillTable(roomNames) {
+    for (var i = 0; i < roomNames.length; i++) {
+        $("#rooms").append("<tr><td>" + roomNames[i].title + "</td></tr>");
+    }
+}
+
+function refreshTable() {
+    fetch("http://localhost:8080/rooms")
+        .then(data => { return data.json() })
+        .then(res => { fillTable(res); })
+}
+refreshTable();
+
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { newRoom(); });
 });
