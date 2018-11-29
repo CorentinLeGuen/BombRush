@@ -22,6 +22,11 @@ public class RoomController {
     @MessageMapping("/info")
     @SendTo("/room")
     public Room home(String roomName) {
+        for (Room r : rooms) {
+            if (r.getTitle().equals(roomName))
+                return null;
+        }
+
         Room room = new Room(HtmlUtils.htmlEscape(roomName));
         rooms.add(room);
         System.out.println("Roomname: " + roomName);
