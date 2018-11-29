@@ -13,12 +13,12 @@ function newRoom() {
 }
 
 function showGreeting(message) {
-    $("#rooms").append("<tr><td>" + message + "</td></tr>");
+    $("#rooms").append("<tr><td><a href=\"/room/" + message + "\">" + message + "</a></td></tr>");
 }
 
 function fillTable(roomNames) {
     for (var i = 0; i < roomNames.length; i++) {
-        $("#rooms").append("<tr><td>" + roomNames[i].title + "</td></tr>");
+        $("#rooms").append("<tr><td><a href=\"/room/" + roomNames[i].title + "\">" + roomNames[i].title + "</a></td></tr>");
     }
 }
 
