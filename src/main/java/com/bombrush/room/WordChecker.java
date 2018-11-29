@@ -26,6 +26,7 @@ public class WordChecker {
             in.close();
             connection.disconnect();
             System.out.println("RESULT: " + result);
+            return !result.startsWith("{\"error\"");
         } catch (IOException e) {
             e.printStackTrace();
         }
