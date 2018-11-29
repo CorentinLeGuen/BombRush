@@ -2,6 +2,7 @@
 gradle
 gradlew
 
+*.iml
 .idea
 *.bat
 
