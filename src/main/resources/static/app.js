@@ -4,7 +4,7 @@ var socket = new SockJS('/bombrush');
 stompClient = Stomp.over(socket);
 stompClient.connect({}, function (frame) {
     stompClient.subscribe('/room', function (greeting) {
-        showGreeting(JSON.parse(greeting.body).title);
+        showGreeting(greeting.body);
     });
 });
 
@@ -23,8 +23,8 @@ function fillTable(roomNames) {
 }
 
 function refreshTable() {
-//    fetch("http://localhost:8080/rooms")
-    fetch("https://bombrush.herokuapp.com/rooms")
+    fetch("http://localhost:8080/rooms")
+//    fetch("https://bombrush.herokuapp.com/rooms")
         .then(data => { return data.json() })
         .then(res => { fillTable(res); })
 }
