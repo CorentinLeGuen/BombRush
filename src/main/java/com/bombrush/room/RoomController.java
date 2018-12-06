@@ -1,15 +1,18 @@
 package com.bombrush.room;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +22,11 @@ import static org.springframework.http.HttpStatus.OK;
 public class RoomController {
 
     private static Map<String, Room> rooms = new HashMap<>();
+
     private static Map<String, String> sessionIdToRoom = new HashMap<>();
+
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @MessageMapping("/info")
     @SendTo("/room")
@@ -35,7 +42,7 @@ public class RoomController {
     public Set<String> sendUser(SimpMessageHeaderAccessor accessor, Subscribe sub) {
         String sessionId = accessor.getSessionId();
         if (!rooms.containsKey(sub.getRoomName())) {
-            return null;
+            return new HashSet<>();
         }
         Room room = rooms.get(sub.getRoomName());
         sessionIdToRoom.put(sessionId, sub.getRoomName());
@@ -61,9 +68,11 @@ public class RoomController {
         return "../public/error/404.html";
     }
 
-    static void userDisconnection(String sessionId) {
+    public void userDisconnection(String sessionId) {
         String roomName = sessionIdToRoom.get(sessionId);
-        if (roomName != null)
+        if (roomName != null) {
             rooms.get(roomName).removePlayer(sessionId);
+            template.convertAndSend("/users", rooms.get(roomName).getPlayers());
+        }
     }
 }
