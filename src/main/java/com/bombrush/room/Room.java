@@ -25,6 +25,11 @@ public class Room {
         }
     }
 
+    public void removePlayer(String sessionId) {
+        String playerDeleted = sessionToPlayer.remove(sessionId);
+        players.remove(playerDeleted);
+    }
+
     public Set<String> getPlayers() {
         return players;
     }

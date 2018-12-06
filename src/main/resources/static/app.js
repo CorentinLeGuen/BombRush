@@ -33,6 +33,6 @@ $(function () {
     });
     $( "#send" ).click(function() {
         newRoom();
-        $("#send").remove();
+        $("form").remove();
     });
 });

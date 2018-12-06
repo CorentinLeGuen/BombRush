@@ -18,7 +18,8 @@ import static org.springframework.http.HttpStatus.OK;
 @Controller
 public class RoomController {
 
-    private Map<String, Room> rooms = new HashMap<>();
+    private static Map<String, Room> rooms = new HashMap<>();
+    private static Map<String, String> sessionIdToRoom = new HashMap<>();
 
     @MessageMapping("/info")
     @SendTo("/room")
@@ -33,11 +34,11 @@ public class RoomController {
     @SendTo("/users")
     public Set<String> sendUser(SimpMessageHeaderAccessor accessor, Subscribe sub) {
         String sessionId = accessor.getSessionId();
-        System.out.println("Session ID : " + sessionId + " number of players : " + rooms.get(sub.getRoomName()).getPlayers().size());
         if (!rooms.containsKey(sub.getRoomName())) {
             return null;
         }
         Room room = rooms.get(sub.getRoomName());
+        sessionIdToRoom.put(sessionId, sub.getRoomName());
         room.addPlayer(sessionId, sub.getUser());
         return room.getPlayers();
     }
@@ -58,5 +59,11 @@ public class RoomController {
             return "/roomPath/index.html";
         }
         return "../public/error/404.html";
+    }
+
+    static void userDisconnection(String sessionId) {
+        String roomName = sessionIdToRoom.get(sessionId);
+        if (roomName != null)
+            rooms.get(roomName).removePlayer(sessionId);
     }
 }
