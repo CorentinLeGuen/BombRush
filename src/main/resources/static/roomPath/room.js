@@ -2,7 +2,7 @@ var currentPath = window.location.href;
 var regex = new RegExp(".*/room/(.*)$");
 var title = regex.exec(currentPath)[1];
 
-document.getElementById("title").innerHTML = "Bienvenue dans le salon '" + title + "'!";
+document.getElementById("title").innerHTML = "Bienvenue dans le salon <mark>" + title + "</mark>!";
 
 
 // Client Socket
@@ -16,11 +16,23 @@ stompClient.connect({}, function (frame) {
         var table = $('#conversation');
         $("#users").text("");
         var elements = JSON.parse(users.body);
-        for (var i = 0; i < elements.length; i++) {
-            $("#users").append("<tr><td>" + elements[i] + "</em></td></tr>");
-        }
+        fillTable(elements);
     });
 });
+
+function fillTable(players) {
+    for (var i = 0; i < players.length; i++) {
+        $("#users").append("<tr><td>" + players[i] + "</em></td></tr>");
+    }
+}
+
+function refreshTable() {
+    fetch("http://localhost:8080/players?roomName="+title)
+//    fetch("https://bombrush.herokuapp.com/players")
+        .then(data => { return data.json() })
+        .then(res => { fillTable(res); })
+}
+refreshTable();
 
 function newRoom() {
     var v = {"user" : $("#name").val(), "roomName" : title};
@@ -30,7 +42,9 @@ function newRoom() {
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
-        $("form").remove();
     });
-    $( "#send" ).click(function() { newRoom(); });
+    $( "#send" ).click(function() {
+        newRoom();
+        $("#send").remove();
+    });
 });
