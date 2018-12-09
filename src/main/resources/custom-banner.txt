@@ -1,4 +1,4 @@
-______  ________  _________${AnsiColor.RED}______ _   _ _____ _   _${AnsiColor.WHITE}
+______  ___/\___  _________${AnsiColor.RED}______ _   _ _____ _   _${AnsiColor.WHITE}
 | ___ \|  _  |  \/  || ___ \${AnsiColor.RED} ___ \ | | /  ___| | | |${AnsiColor.WHITE}
 | |_/ /| | | | .  . || |_/ /${AnsiColor.RED} |_/ / | | \ `--.| |_| |${AnsiColor.WHITE}
 | ___ \| | | | |\/| || ___ \${AnsiColor.RED}    /| | | |`--. \  _  |${AnsiColor.WHITE}

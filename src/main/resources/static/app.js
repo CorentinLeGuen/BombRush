@@ -15,7 +15,7 @@ function newRoom() {
 
 function fillTable(roomNames) {
     for (var i = 0; i < roomNames.length; i++) {
-        $("#rooms").append("<tr><td><a href=\"/room/" + roomNames[i] + "\">" + roomNames[i] + "</a></td></tr>");
+        $("#rooms").append("<li class='list-group-item'><a href=\"/room/" + roomNames[i] + "\">" + roomNames[i] + "</a></li>");
     }
 }
 
@@ -33,6 +33,5 @@ $(function () {
     });
     $( "#send" ).click(function() {
         newRoom();
-        $("form").remove();
     });
 });

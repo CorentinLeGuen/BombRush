@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Hello WebSocket</title>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BombRush</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="/main.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Web Sockets -->
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
     <script src="/app.js"></script>
 </head>
 
 <body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-    enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
+<noscript>
+    <h2 style="color: #ff0000">
+        Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+        enabled. Please enable Javascript and reload this page!
+    </h2>
+</noscript>
 <div id="main-content" class="container">
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="title">What is your room name?</label>
-            <input type="text" id="title" class="form-control" placeholder="Create room...">
-        </div>
-        <button id="send" class="btn btn-default" type="submit">Envoyer</button>
-    </form>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Rooms</th>
-                </tr>
-                </thead>
-                    <tbody id="rooms">
-                </tbody>
-            </table>
-        </div>
+    <h1 class="text-center">
+        Bienvenue sur BombRush !
+    </h1>
+    <br/>
+    <hr/>
+    <br/>
+    <div class="container-fluid">
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" id="title" class="form-control" placeholder="Nom du nouveau salon...">
+                <div class="input-group-append">
+                    <button id="send" class="btn btn-outline-success" type="submit">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="container-fluid">
+        <h5 class="text-center text-info">Liste des salons disponibles : </h5>
+        <ul class="list-group" id="rooms">
+            Pas encore de salon !
+        </ul>
+    </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

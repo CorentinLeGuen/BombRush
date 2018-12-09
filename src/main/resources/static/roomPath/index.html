@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <script src="/webjars/jquery/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Salon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Web Sockets -->
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <title>Room</title>
+
+    <style>
+        div.row {
+            margin-right: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1 id="title"></h1>
+    <h1 class="text-center" id="title"></h1>
 
+    <div class="container">
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" id="name" class="form-control" placeholder="Nom du nouveau salon...">
+                <div class="input-group-append">
+                    <button id="send" class="btn btn-outline-success" type="submit">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr/>
     <div class="row">
         <div class="col-md-9">
-            <div class="container">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="name">What is your name?</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter name...">
-                    </div>
-                    <button id="send" class="btn btn-default" type="submit">Envoyer</button>
-                </form>
-            </div>
+
         </div>
-        <div class="col-sm-3">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Users</th>
-                </tr>
-                </thead>
-                <tbody id="users">
-                </tbody>
-            </table>
+        <div class="col-md-3">
+            <div class="container">
+                <ul class="list-group" id="users">
+                </ul>
+            </div>
         </div>
     </div>
 
     <script src="/roomPath/room.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

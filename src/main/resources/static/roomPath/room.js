@@ -2,8 +2,8 @@ var currentPath = window.location.href;
 var regex = new RegExp(".*/room/(.*)$");
 var title = regex.exec(currentPath)[1];
 
-document.getElementById("title").innerHTML = "Bienvenue dans le salon <mark>" + title + "</mark>!";
-
+document.getElementById("title").innerHTML = "Bienvenue dans le salon " + decodeURI(title) + "!";
+document.getElementsByName("title").innerHTML = "Salon " + decodeURI(title);
 
 // Client Socket
 var stompClient = null;
@@ -22,7 +22,7 @@ stompClient.connect({}, function (frame) {
 
 function fillTable(players) {
     for (var i = 0; i < players.length; i++) {
-        $("#users").append("<tr><td>" + players[i] + "</em></td></tr>");
+        $("#users").append("<li class='list-group-item'>" + players[i] + "</li>");
     }
 }
 
@@ -35,7 +35,7 @@ function refreshTable() {
 refreshTable();
 
 function newRoom() {
-    var v = {"user" : $("#name").val(), "roomName" : title};
+    var v = {"user" : $("#name").val(), "roomName" : decodeURI(title)};
     stompClient.send("/app/user", {}, JSON.stringify(v));
 }
 
