@@ -1,0 +1,7 @@
+______  ________  _________${AnsiColor.RED}______ _   _ _____ _   _${AnsiColor.WHITE}
+| ___ \|  _  |  \/  || ___ \${AnsiColor.RED} ___ \ | | /  ___| | | |${AnsiColor.WHITE}
+| |_/ /| | | | .  . || |_/ /${AnsiColor.RED} |_/ / | | \ `--.| |_| |${AnsiColor.WHITE}
+| ___ \| | | | |\/| || ___ \${AnsiColor.RED}    /| | | |`--. \  _  |${AnsiColor.WHITE}
+| |_/ /\ \_/ / |  | || |_/ /${AnsiColor.RED} |\ \| |_| /\__/ / | | |${AnsiColor.WHITE}
+\____/  \___/\_|  |_/\____/${AnsiColor.RED}\_| \_|\___/\____/\_| |_/${AnsiColor.WHITE}
+Made By ${AnsiColor.BLUE}Corentin Le Guen ${AnsiColor.WHITE}and${AnsiColor.BLUE} Guillaume Helouis${AnsiColor.WHITE}
