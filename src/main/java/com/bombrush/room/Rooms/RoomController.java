@@ -1,4 +1,4 @@
-package com.bombrush.room;
+package com.bombrush.room.Rooms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

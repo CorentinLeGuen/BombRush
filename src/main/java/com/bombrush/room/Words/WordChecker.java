@@ -1,7 +1,7 @@
 /*
  * Copyright © BNP PARIBAS - All rights reserved.
  */
-package com.bombrush.room;
+package com.bombrush.room.Words;
 
 import org.springframework.stereotype.Service;
 

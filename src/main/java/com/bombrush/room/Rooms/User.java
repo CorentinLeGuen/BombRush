@@ -1,4 +1,4 @@
-package com.bombrush.room;
+package com.bombrush.room.Rooms;
 
 public class User {
     private String sessionId;
