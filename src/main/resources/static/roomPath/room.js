@@ -25,8 +25,8 @@ function fillTable(players) {
 }
 
 function refreshTable() {
-    fetch("http://localhost:8080/players?roomName="+title)
-//    fetch("https://bombrush.herokuapp.com/players")
+    // fetch("http://localhost:8080/players?roomName="+title)
+   fetch("https://bombrush.herokuapp.com/players")
         .then(data => { return data.json() })
         .then(res => { fillTable(res); })
 }
