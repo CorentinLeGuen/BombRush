@@ -17,12 +17,17 @@ public class Room {
         this.title = title;
     }
 
-    public void addPlayer(String sessionId, String player) {
-        if (!players.contains(player)) {
-            players.remove(sessionToPlayer.get(sessionId));
-            sessionToPlayer.put(sessionId, player);
-            players.add(player);
+    public void addPlayer(String sessionId, String playerName) {
+        players.remove(sessionToPlayer.get(sessionId));
+        int n = 1;
+        String name = playerName;
+        while (players.contains(name)) {
+            n++;
+            name = playerName + n;
         }
+        sessionToPlayer.put(sessionId, name);
+        players.add(name);
+
     }
 
     public void removePlayer(String sessionId) {
