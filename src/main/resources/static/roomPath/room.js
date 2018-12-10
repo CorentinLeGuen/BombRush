@@ -12,8 +12,6 @@ var socket = new SockJS('/bombrush');
 stompClient = Stomp.over(socket);
 stompClient.connect({}, function (frame) {
     stompClient.subscribe('/users', function (users) {
-        console.log(users);
-        var table = $('#conversation');
         $("#users").text("");
         var elements = JSON.parse(users.body);
         fillTable(elements);
@@ -27,8 +25,8 @@ function fillTable(players) {
 }
 
 function refreshTable() {
-    fetch("http://localhost:8080/players?roomName="+title)
-//    fetch("https://bombrush.herokuapp.com/players")
+    // fetch("http://localhost:8080/players?roomName="+title)
+   fetch("https://bombrush.herokuapp.com/players")
         .then(data => { return data.json() })
         .then(res => { fillTable(res); })
 }
