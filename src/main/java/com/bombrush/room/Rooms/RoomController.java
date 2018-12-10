@@ -9,7 +9,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
@@ -26,6 +25,8 @@ public class RoomController {
 
     private static Map<String, String> sessionIdToRoom = new HashMap<>();
 
+    private static Map<String, Boolean> roomUsed = new HashMap<>();
+
     @Autowired
     private SimpMessagingTemplate template;
 
@@ -33,8 +34,10 @@ public class RoomController {
     @SendTo("/room")
     public Set<String> registerRoom(String roomName) {
         String room = HtmlUtils.htmlEscape(roomName);
-        if (!rooms.containsKey(room))
+        if (!rooms.containsKey(room)) {
             rooms.put(room, new Room(room));
+            roomUsed.put(room, false);
+        }
         return rooms.keySet();
     }
 
@@ -45,6 +48,7 @@ public class RoomController {
         if (!rooms.containsKey(sub.getRoomName())) {
             return new HashSet<>();
         }
+        roomUsed.replace(sub.getRoomName(), true);
         Room room = rooms.get(sub.getRoomName());
         sessionIdToRoom.put(sessionId, sub.getRoomName());
         room.addPlayer(sessionId, sub.getUser());
@@ -74,6 +78,11 @@ public class RoomController {
         if (roomName != null) {
             rooms.get(roomName).removePlayer(sessionId);
             template.convertAndSend("/users", rooms.get(roomName).getPlayers());
+            if (roomUsed.get(roomName) && rooms.get(roomName).getPlayers().isEmpty()) {
+                rooms.remove(roomName);
+                sessionIdToRoom.remove(roomName);
+                roomUsed.remove(roomName);
+            }
         }
     }
 }

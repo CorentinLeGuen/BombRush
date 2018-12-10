@@ -12,8 +12,6 @@ var socket = new SockJS('/bombrush');
 stompClient = Stomp.over(socket);
 stompClient.connect({}, function (frame) {
     stompClient.subscribe('/users', function (users) {
-        console.log(users);
-        var table = $('#conversation');
         $("#users").text("");
         var elements = JSON.parse(users.body);
         fillTable(elements);
