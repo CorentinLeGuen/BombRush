@@ -1,8 +1,9 @@
 /*
  * Copyright © BNP PARIBAS - All rights reserved.
  */
-package com.bombrush.room.Words;
+package com.bombrush.room.controller;
 
+import com.bombrush.room.service.WordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @Controller
-@RequestMapping("/dico")
-public class DicoController {
+@RequestMapping("/word")
+public class WordController {
 
     @Autowired
-    private
-    WordChecker wordChecker;
+    private WordChecker wordChecker;
 
     @GetMapping("/french")
     public ResponseEntity checkIfFrenchWordExists(@RequestParam(name = "word") String word) {
