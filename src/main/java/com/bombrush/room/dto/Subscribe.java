@@ -1,7 +1,9 @@
-package com.bombrush.room.Rooms;
+package com.bombrush.room.dto;
 
 public class Subscribe {
+
     private String user;
+
     private String roomName;
 
     public String getUser() {

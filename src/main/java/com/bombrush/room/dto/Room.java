@@ -1,4 +1,4 @@
-package com.bombrush.room.Rooms;
+package com.bombrush.room.dto;
 
 import java.util.HashMap;
 import java.util.HashSet;

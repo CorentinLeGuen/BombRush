@@ -1,7 +1,4 @@
-/*
- * Copyright © BNP PARIBAS - All rights reserved.
- */
-package com.bombrush.room.controller;
+package com.bombrush.room.controller.rest;
 
 import com.bombrush.room.service.WordChecker;
 import org.springframework.beans.factory.annotation.Autowired;

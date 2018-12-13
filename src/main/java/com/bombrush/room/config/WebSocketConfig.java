@@ -1,6 +1,6 @@
-package com.bombrush.room.Sockets;
+package com.bombrush.room.config;
 
-import com.bombrush.room.Rooms.RoomController;
+import com.bombrush.room.service.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -14,10 +14,10 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer  {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Autowired
-    RoomController roomController;
+    private Game game;
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -40,6 +40,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer  {
     public void onSocketDisconnected(SessionDisconnectEvent event) {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         System.out.println("[Disconnected] : " + sha.getSessionId());
-        roomController.userDisconnection(sha.getSessionId());
+        game.disconnectUser(sha.getSessionId());
     }
 }

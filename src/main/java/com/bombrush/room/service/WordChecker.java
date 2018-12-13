@@ -1,6 +1,3 @@
-/*
- * Copyright © BNP PARIBAS - All rights reserved.
- */
 package com.bombrush.room.service;
 
 import com.fasterxml.jackson.databind.JsonNode;

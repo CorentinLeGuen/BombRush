@@ -1,7 +1,9 @@
-package com.bombrush.room.Rooms;
+package com.bombrush.room.dto;
 
 public class User {
+
     private String sessionId;
+
     private String userName;
 
     public User(String sessionId, String userName) {
